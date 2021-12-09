@@ -1,27 +1,43 @@
 * {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .color {
-    border: #000000 solid 1px;
-    display: inline-block;
-    width: 25px;
-    height: 25px;
+  border: black solid 1px;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  padding: 0;
 }
 
 .black {
-    background-color: #000000;
+  background-color: black;
 }
 
 .red {
-    background-color: #ff0000;
+  background-color: red;
 }
 
 .yellow {
-    background-color: #ffff00;
+  background-color: yellow;
 }
 
 .blue {
-    background-color: #0000ff;
+  background-color: blue;
+}
+
+#pixel-board {
+  width: 250px;
+  height: 250px;
+  margin: 0 auto;
+}
+
+.pixel {
+  background-color: white;
+  width: 40px;
+  height: 40px;
+  border: black solid 1px;
+  display: inline-block;
 }
