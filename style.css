@@ -1,0 +1,27 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.color {
+    border: #000000 solid 1px;
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+}
+
+.black {
+    background-color: #000000;
+}
+
+.red {
+    background-color: #ff0000;
+}
+
+.yellow {
+    background-color: #ffff00;
+}
+
+.blue {
+    background-color: #0000ff;
+}
