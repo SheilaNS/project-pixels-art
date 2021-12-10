@@ -3,6 +3,9 @@ const red = document.getElementById('red');
 const yellow = document.getElementById('yellow');
 const blue = document.getElementById('blue');
 const button = document.getElementById('clear-board');
+const board = document.querySelector('#pixel-board');
+
+dinamicBoard(5);
 
 function addClass(event) {
   const withClass = document.querySelector('.selected');
@@ -34,3 +37,16 @@ function cleanBoard() {
 }
 
 button.addEventListener('click', cleanBoard);
+
+function dinamicBoard(size) {
+  for (let l = 0; l < size; l += 1) {
+    const line = document.createElement('div');
+    line.className = 'line';
+    for (let c = 0; c < size; c += 1) {
+      const colun = document.createElement('div');
+      colun.className = 'pixel';
+      line.appendChild(colun);
+    }
+    board.appendChild(line);
+  }
+}
