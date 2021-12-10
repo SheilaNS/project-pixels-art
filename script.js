@@ -16,8 +16,9 @@ yellow.addEventListener('click', addClass);
 blue.addEventListener('click', addClass);
 
 function changeColor(event) {
-  const color = document.querySelector('.selected').id;
-  event.target.style.backgroundColor = color;
+  const color = document.querySelector('.selected');
+  const evento = event.target;
+  evento.style.backgroundColor = window.getComputedStyle(color).backgroundColor;
 }
 
 for (let i = 0; i < 25; i += 1) {
