@@ -9,16 +9,25 @@
 </head>
 <body>
     <header>
+        <!-- Requisito 01 -->
         <h1 id="title">Paleta de Cores</h1>
+    </header>
+    <main id="main-content">
+        <!-- Requisito 02, 03 e 06 -->
         <ul id="color-palette">
             <li class="color selected" id="black"></li>
             <li class="color" id="red"></li>
             <li class="color" id="yellow"></li>
             <li class="color" id="blue"></li>
         </ul>
-    </header>
-    <main id="main-content">
-        <button id="clear-board">Limpar</button>
+        <div id="clear-button">
+            <button id="clear-board">Limpar</button>
+        </div>
+        <!-- Requisito 10 -->
+        <div id="board-generator">
+            <input type="number" min="1" id="board-size">
+            <button id="generate-board">VQV</button>
+        </div>
         <div id="pixel-board">
         </div>
     </main>
