@@ -1,6 +1,33 @@
 * {
   margin: 0;
   padding: 0;
+  text-align: center;
+}
+
+body {
+  background-color: rgb(221, 215, 207);
+}
+
+main {
+  background-color: rgba(253, 253, 253, 0.568);
+  margin: 30px 20px;
+  border-radius: 20px;
+  padding: 30px;
+}
+
+header {
+  background-image: url(/pencilsUpsidedown.png);
+  background-size: contain;
+  background-position-y: -2px;
+  background-repeat: repeat-x;
+  padding-top: 20px;
+  padding-bottom: 30px;
+}
+
+header h1{
+  padding-top: 10px;
+  height: 50px;
+  background-color: rgba(253, 253, 253, 0.568);
 }
 
 .line {
@@ -25,4 +52,28 @@
   height: 40px;
   border: black solid 1px;
   display: inline-block;
+}
+
+button {
+  background-color: rgb(247, 240, 231);
+  height: 30px;
+  width: 60px;
+  border-radius: 10px;
+  border-style: groove;
+  margin: 5px 0;
+}
+
+input {
+  height: 25px;
+  width: 140px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+ul {
+  margin-top: 10px;
+}
+
+li {
+  border-radius: 15px;
 }
