@@ -3,6 +3,9 @@ const board = document.querySelector('#pixel-board');
 const colorBoard = document.querySelectorAll('.color');
 const boardInput = document.getElementById('board-size');
 const sizeButton = document.getElementById('generate-board');
+const redSpot = document.getElementById('red');
+const yellowSpot = document.getElementById('yellow');
+const blueSpot = document.getElementById('blue');
 let boardSize = 5;
 
 // Requisito 04
@@ -21,6 +24,47 @@ function dinamicBoard(size) {
 }
 
 dinamicBoard(boardSize);
+
+// Requisito 12
+function randomNumber() {
+  const number = Math.floor(Math.random() * 256);
+  return number;
+}
+
+function newRedColor() {
+  const rgbNumber1 = randomNumber();
+  const rgbNumber2 = randomNumber();
+  const rgbNumber3 = randomNumber();
+  let newRed = redSpot.style.backgroundColor;
+  newRed = `rgb( ${rgbNumber1} , ${rgbNumber2} , ${rgbNumber3} )`;
+  return newRed;
+}
+
+function newYellowColor() {
+  const rgbNumber1 = randomNumber();
+  const rgbNumber2 = randomNumber();
+  const rgbNumber3 = randomNumber();
+  let newYellow = yellowSpot.style.backgroundColor;
+  newYellow = `rgb( ${rgbNumber1} , ${rgbNumber2} , ${rgbNumber3} )`;
+  return newYellow;
+}
+
+function newBlueColor() {
+  const rgbNumber1 = randomNumber();
+  const rgbNumber2 = randomNumber();
+  const rgbNumber3 = randomNumber();
+  let newBlue = blueSpot.style.backgroundColor;
+  newBlue = `rgb( ${rgbNumber1} , ${rgbNumber2} , ${rgbNumber3} )`;
+  return newBlue;
+}
+
+function inicialColors() {
+  redSpot.style.backgroundColor = newRedColor();
+  yellowSpot.style.backgroundColor = newYellowColor();
+  blueSpot.style.backgroundColor = newBlueColor();
+}
+
+inicialColors();
 
 // Requisito 07
 function addClass(event) {
