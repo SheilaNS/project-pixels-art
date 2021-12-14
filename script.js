@@ -56,12 +56,26 @@ function clearBoard() {
 
 clearButton.addEventListener('click', clearBoard);
 
+// Requisito 11
+function checkSize(newSize) {
+  if (newSize < 5) {
+    boardSize = 5;
+  }
+
+  if (newSize > 50) {
+    boardSize = 50;
+  }
+}
+
 // Requisito 10
 function checkNumber() {
   boardSize = boardInput.value;
   if (boardSize === '' || boardSize <= 0) {
     alert('Board inválido!');
   }
+
+  checkSize(boardSize);
+
   dinamicBoard(boardSize);
   for (let i = 0; i < (boardSize * boardSize); i += 1) {
     const newBoard = document.querySelectorAll('.pixel');
