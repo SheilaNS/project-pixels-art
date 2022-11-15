@@ -9,7 +9,7 @@ const paintPixel = ({ target }) => {
 };
 
 const createBoard = (newSize) => {
-  const boardSize = !newSize ? 5 : newSize;
+  const boardSize = !newSize || newSize === '' ? 5 : newSize;
   const board = document.querySelector('#pixel-board');
   board.innerHTML = '';
   for (let i = 0; i < boardSize; i += 1) {
