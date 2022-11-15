@@ -1,130 +1,116 @@
-const clearButton = document.getElementById('clear-board');
-const board = document.querySelector('#pixel-board');
-const colorBoard = document.querySelectorAll('.color');
-const boardInput = document.getElementById('board-size');
-const sizeButton = document.getElementById('generate-board');
-const redSpot = document.getElementById('red');
-const yellowSpot = document.getElementById('yellow');
-const blueSpot = document.getElementById('blue');
-let boardSize = 5;
+const paintPixel = ({ target }) => {
+  const pixels = document.querySelectorAll('.pixel');
+  const event = target;
+  const selectedColor = document.querySelector('.selected');
+  event.style.backgroundColor = window.getComputedStyle(selectedColor).backgroundColor;
+  const paintedBoard = [];
+  pixels.forEach((elem) => paintedBoard.push(elem.style.backgroundColor));
+  localStorage.setItem('pixelBoard', JSON.stringify(paintedBoard));
+};
 
-// Requisito 04
-function dinamicBoard(size) {
+const createBoard = (newSize) => {
+  const boardSize = !newSize ? 5 : newSize;
+  const board = document.querySelector('#pixel-board');
   board.innerHTML = '';
-  for (let l = 0; l < size; l += 1) {
-    const line = document.createElement('div');
-    line.className = 'line';
-    for (let c = 0; c < size; c += 1) {
-      const colun = document.createElement('div');
-      colun.className = 'pixel';
-      line.appendChild(colun);
+  for (let i = 0; i < boardSize; i += 1) {
+    const divLine = document.createElement('div');
+    for (let l = 0; l < boardSize; l += 1) {
+      const divPixel = document.createElement('div');
+      divPixel.className = 'pixel';
+      divPixel.style.backgroundColor = 'white';
+      divPixel.addEventListener('click', paintPixel);
+      divLine.appendChild(divPixel);
     }
-    board.appendChild(line);
+    board.appendChild(divLine);
   }
-}
+};
 
-dinamicBoard(boardSize);
+createBoard();
 
-// Requisito 12
-function randomNumber() {
-  const number = Math.floor(Math.random() * 256);
-  return number;
-}
+// cria o código rgb aleatório
+const randomRGB = () => {
+  const num1 = Math.floor(Math.random() * 256);
+  const num2 = Math.floor(Math.random() * 256);
+  const num3 = Math.floor(Math.random() * 256);
+  return `rgb(${num1}, ${num2}, ${num3})`;
+};
 
-function newRedColor() {
-  const rgbNumber1 = randomNumber();
-  const rgbNumber2 = randomNumber();
-  const rgbNumber3 = randomNumber();
-  let newRed = redSpot.style.backgroundColor;
-  newRed = `rgb( ${rgbNumber1} , ${rgbNumber2} , ${rgbNumber3} )`;
-  return newRed;
-}
-
-function newYellowColor() {
-  const rgbNumber1 = randomNumber();
-  const rgbNumber2 = randomNumber();
-  const rgbNumber3 = randomNumber();
-  let newYellow = yellowSpot.style.backgroundColor;
-  newYellow = `rgb( ${rgbNumber1} , ${rgbNumber2} , ${rgbNumber3} )`;
-  return newYellow;
-}
-
-function newBlueColor() {
-  const rgbNumber1 = randomNumber();
-  const rgbNumber2 = randomNumber();
-  const rgbNumber3 = randomNumber();
-  let newBlue = blueSpot.style.backgroundColor;
-  newBlue = `rgb( ${rgbNumber1} , ${rgbNumber2} , ${rgbNumber3} )`;
-  return newBlue;
-}
-
-function inicialColors() {
-  redSpot.style.backgroundColor = newRedColor();
-  yellowSpot.style.backgroundColor = newYellowColor();
-  blueSpot.style.backgroundColor = newBlueColor();
-}
-
-inicialColors();
-
-// Requisito 07
-function addClass(event) {
-  for (let i = 0; i < colorBoard.length; i += 1) {
-    colorBoard[i].classList.remove('selected');
+// função de gerar cores aleatórias do palette de cores
+const randomColorsBtn = document.querySelector('#button-random-color');
+randomColorsBtn.addEventListener('click', () => {
+  const colorPalette = document.querySelectorAll('.color');
+  const newColors = [];
+  for (let i = 1; i < colorPalette.length; i += 1) {
+    colorPalette[i].style.backgroundColor = randomRGB();
+    newColors.push(colorPalette[i].style.backgroundColor);
   }
-  event.target.classList.add('selected');
-}
+  localStorage.setItem('colorPalette', JSON.stringify(newColors));
+});
 
-for (let i = 0; i < colorBoard.length; i += 1) {
-  colorBoard[i].addEventListener('click', addClass);
-}
-
-// Requisito 08
-function changeColor(event) {
-  const color = document.querySelector('.selected');
-  const evento = event.target;
-  evento.style.backgroundColor = window.getComputedStyle(color).backgroundColor;
-}
-
-for (let i = 0; i < (boardSize * boardSize); i += 1) {
-  const pixel = document.getElementsByClassName('pixel');
-  pixel[i].addEventListener('click', changeColor);
-}
-
-// Requisito 09
-function clearBoard() {
-  for (let i = 0; i < (boardSize * boardSize); i += 1) {
-    const clear = document.querySelectorAll('.pixel');
-    clear[i].style.backgroundColor = 'white';
+// recupera o board pintado do localStorage
+const getPaintedBoard = () => {
+  const localBoard = localStorage.getItem('pixelBoard');
+  if (!localBoard) return localStorage.setItem('pixelBoard', JSON.stringify([]));
+  const parcedBoard = JSON.parse(localBoard);
+  const pixels = document.querySelectorAll('.pixel');
+  for (let i = 1; i < parcedBoard.length; i += 1) {
+    pixels[i].style.backgroundColor = parcedBoard[i];
   }
-}
+};
 
-clearButton.addEventListener('click', clearBoard);
+const getBoardSize = () => {
+  const localSize = localStorage.getItem('boardSize');
+  if (!localSize) return localStorage.setItem('boardSize', JSON.stringify(''));
+  const parsedSize = JSON.parse(localSize);
+  createBoard(parsedSize);
+  getPaintedBoard();
+};
 
-// Requisito 11
-function checkSize(newSize) {
-  if (newSize < 5) {
-    boardSize = 5;
+// recupera as cores aleatórias criadas do localStorage
+const getSavedPalette = () => {
+  const localColors = localStorage.getItem('colorPalette');
+  if (!localColors) return localStorage.setItem('colorPalette', JSON.stringify([]));
+  getBoardSize();
+  const parsedColors = JSON.parse(localColors);
+  const colorPalette = document.querySelectorAll('.color');
+  for (let i = 1; i < colorPalette.length; i += 1) {
+    colorPalette[i].style.backgroundColor = parsedColors[i - 1];
   }
+};
 
-  if (newSize > 50) {
-    boardSize = 50;
-  }
-}
+// muda a classe selected do palette de cores
+const colorPalette = document.querySelectorAll('.color');
+colorPalette.forEach((color) => {
+  color.addEventListener('click', ({ target }) => {
+    colorPalette.forEach((elem) => elem.classList.remove('selected'));
+    target.classList.add('selected');
+  });
+});
 
-// Requisito 10
-function checkNumber() {
-  boardSize = boardInput.value;
-  if (boardSize === '' || boardSize <= 0) {
-    alert('Board inválido!');
-  }
+// limpa o board
+const clearBtn = document.querySelector('#clear-board');
+clearBtn.addEventListener('click', () => {
+  const pixels = document.querySelectorAll('.pixel');
+  pixels.forEach((elem) => {
+    const pixel = elem;
+    pixel.style.backgroundColor = 'white';
+  });
+});
 
-  checkSize(boardSize);
+// função de criar um novo board
+const generateBoardBtn = document.querySelector('#generate-board');
+generateBoardBtn.addEventListener('click', () => {
+  const boardSize = document.querySelector('#board-size');
+  if (Number(boardSize.value) <= 0) return alert('Board inválido!');
+  if (Number(boardSize.value) > 50) boardSize.value = 50;
+  if (Number(boardSize.value) <= 5) boardSize.value = 5;
+  createBoard(Number(boardSize.value));
+  localStorage.setItem('pixelBoard', JSON.stringify([]));
+  localStorage.setItem('boardSize', JSON.stringify(boardSize.value));
+});
 
-  dinamicBoard(boardSize);
-  for (let i = 0; i < (boardSize * boardSize); i += 1) {
-    const newBoard = document.querySelectorAll('.pixel');
-    newBoard[i].addEventListener('click', changeColor);
-  }
-}
-
-sizeButton.addEventListener('click', checkNumber);
+window.onload = () => {
+  getSavedPalette();
+  getPaintedBoard();
+  getBoardSize();
+};
