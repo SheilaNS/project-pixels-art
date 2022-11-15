@@ -32,8 +32,6 @@ URL: https://sheilans.github.io/project-pixels-art/
 ├── .eslintrc.json
 ├── .gitignore
 ├── .stylelintrc.json
-├── art-with-pixels.gif
-├── cypress.json
 ├── index.html
 ├── package-lock.json
 ├── package.json
