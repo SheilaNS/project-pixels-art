@@ -4,7 +4,7 @@
 
 Projeto obrigatório do Bloco 5 - JavaScript: DOM, Eventos e Web Storage do curso de Desenvolvimento Web da [Trybe](https://www.betrybe.com).<br>
 Uma página web com uma paleta de cores funcional para criar desenhos pixelados em um board dinâmico.<br>
-O board vai de 5x5 arté 50x50 e as cores são vriadas aleatóriamente.<br>
+O board vai de 5x5 arté 50x50 e as cores são criadas aleatóriamente.<br>
 Desenvolvido apenas com HTML, CSS e JavaScript.<br><br>
 Quantidade de requisitos: 13<br>
 Requisitos feitos: 13<br>
